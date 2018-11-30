@@ -3,6 +3,10 @@
 # Start batching commands
 batch
 
+# NettyConnector for workers to connect to
+/subsystem=messaging-activemq/server=default/remote-acceptor=netty:add(socket-binding=messaging)
+/socket-binding-group=standard-sockets/socket-binding=messaging:add(port=5445)
+
 # Configure the JMS test queue
 jms-queue add --queue-address=testQueue --entries=queue/test,java:jboss/exported/jms/queue/test
 

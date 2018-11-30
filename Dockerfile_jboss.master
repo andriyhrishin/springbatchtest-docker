@@ -6,4 +6,8 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 ADD master.customization /opt/jboss/wildfly/customization/
 RUN /opt/jboss/wildfly/customization/execute.sh standalone standalone-full.xml
 
+EXPOSE 8080
+EXPOSE 9990
+EXPOSE 5445
+
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "standalone-full.xml"]

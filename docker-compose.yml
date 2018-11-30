@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  jbossm:
+    image: jboss-sb-master:latest
+    hostname: jbossm
+    ports:
+      - "9990:9990"
+      - "8080:8080"
+      - "5445:5445"
+    volumes:
+      - /home/ubuntu/projects/deploy.master:/opt/jboss/wildfly/standalone/deployments/
+  jbossw1:
+    image: jboss-sb-worker:latest
+    hostname: jbossw1
+    depends_on:
+      - jbossm
+    ports:
+      - "9991:9990"
+      - "8081:8080"
+    volumes:
+      - /home/ubuntu/projects/deploy.worker:/opt/jboss/wildfly/standalone/deployments/
+    links:
+      - jbossm
+  postgres:
+    image: postgres
